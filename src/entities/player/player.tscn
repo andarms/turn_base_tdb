@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://jvlxsi4bic1l"]
+
+[ext_resource type="Texture2D" uid="uid://cvq2ojfmxa1l7" path="res://assets/tiles/tilematiny_dungeon.png" id="1_opqjq"]
+[ext_resource type="Script" path="res://src/entities/player/player_movement.gd" id="2_rmvd3"]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(40, 40)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_opqjq")
+region_enabled = true
+region_rect = Rect2(16, 128, 16, 16)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 16)
+
+[node name="PlayerMovement" type="Node2D" parent="." node_paths=PackedStringArray("body", "ray")]
+script = ExtResource("2_rmvd3")
+speed = 96.0
+body = NodePath("..")
+ray = NodePath("../RayCast2D")
