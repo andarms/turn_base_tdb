@@ -30,6 +30,7 @@ func _physics_process(delta: float) -> void:
 	var distance: float = body.global_position.distance_to(target_position)
 	if distance < 1:
 		body.global_position = target_position
+		WorldState.player_position = body.position
 		is_moving = false
 		return
 

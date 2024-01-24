@@ -20,39 +20,17 @@ map = NodePath("../../TileMap")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3, 3)
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("map", "player") instance=ExtResource("4_aaqsi")]
-map = NodePath("../TileMap")
-player = NodePath("../Player")
+[node name="Enemy" parent="." instance=ExtResource("4_aaqsi")]
+position = Vector2(-136, 152)
 
-[node name="Enemy2" parent="." node_paths=PackedStringArray("map", "player") instance=ExtResource("4_aaqsi")]
-position = Vector2(336, 0)
-map = NodePath("../TileMap")
-player = NodePath("../Player")
+[node name="Enemy2" parent="." instance=ExtResource("4_aaqsi")]
+position = Vector2(120, 200)
 
-[node name="Enemy3" parent="." node_paths=PackedStringArray("map", "player") instance=ExtResource("4_aaqsi")]
-position = Vector2(-192, 128)
-map = NodePath("../TileMap")
-player = NodePath("../Player")
+[node name="Enemy3" parent="." instance=ExtResource("4_aaqsi")]
+position = Vector2(360, 248)
 
-[node name="Enemy4" parent="." node_paths=PackedStringArray("map", "player") instance=ExtResource("4_aaqsi")]
-position = Vector2(272, 208)
-map = NodePath("../TileMap")
-player = NodePath("../Player")
-
-[node name="Enemy5" parent="." node_paths=PackedStringArray("map", "player") instance=ExtResource("4_aaqsi")]
-position = Vector2(-16, 240)
-map = NodePath("../TileMap")
-player = NodePath("../Player")
-
-[node name="Enemy6" parent="." node_paths=PackedStringArray("map", "player") instance=ExtResource("4_aaqsi")]
-position = Vector2(400, 272)
-map = NodePath("../TileMap")
-player = NodePath("../Player")
-
-[node name="Enemy7" parent="." node_paths=PackedStringArray("map", "player") instance=ExtResource("4_aaqsi")]
-position = Vector2(400, 144)
-map = NodePath("../TileMap")
-player = NodePath("../Player")
+[node name="Enemy4" parent="." instance=ExtResource("4_aaqsi")]
+position = Vector2(248, -72)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

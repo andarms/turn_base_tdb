@@ -8,7 +8,7 @@ class_name Enemy extends CharacterBody2D
 var grid: AStarGrid2D
 var is_moving: bool = false
 var target_position: Vector2
-var speed: float = 60
+var speed: float = 30
 var path: Array[Vector2i] = []
 
 

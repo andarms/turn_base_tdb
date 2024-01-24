@@ -1,13 +1,117 @@
-[gd_scene load_steps=4 format=3 uid="uid://do0d53gt66oah"]
+[gd_scene load_steps=10 format=3 uid="uid://do0d53gt66oah"]
 
-[ext_resource type="Script" path="res://src/entities/enemies/enemy.gd" id="1_d8g64"]
 [ext_resource type="Texture2D" uid="uid://cvq2ojfmxa1l7" path="res://assets/tiles/tilematiny_dungeon.png" id="2_g433o"]
+[ext_resource type="Script" path="res://src/ai/core/nodes/agent.gd" id="2_taxf6"]
+[ext_resource type="Script" path="res://src/ai/core/nodes/planner.gd" id="3_6kdgm"]
+[ext_resource type="Script" path="res://src/ai/actions/attack.gd" id="4_qvldq"]
+[ext_resource type="Script" path="res://src/ai/actions/seek.gd" id="5_6mq2c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0iwi"]
 size = Vector2(16, 16)
 
+[sub_resource type="Animation" id="Animation_tibgg"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_5javt"]
+resource_name = "attack"
+length = 0.25
+step = 0.01
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.02, 0.21, 0.25)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -6, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.02, 0.21, 0.25)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.732962, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.02, 0.21, 0.25)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.769039, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.02, 0.21, 0.25)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_idqwp"]
+_data = {
+"RESET": SubResource("Animation_tibgg"),
+"attack": SubResource("Animation_5javt")
+}
+
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
-script = ExtResource("1_d8g64")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_g433o")
@@ -19,3 +123,25 @@ shape = SubResource("RectangleShape2D_w0iwi")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 16)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_idqwp")
+}
+
+[node name="Agent" type="Node" parent="." node_paths=PackedStringArray("planner")]
+script = ExtResource("2_taxf6")
+planner = NodePath("../Planner")
+
+[node name="Planner" type="Node" parent="."]
+script = ExtResource("3_6kdgm")
+
+[node name="AttackAction" type="Node" parent="Planner" node_paths=PackedStringArray("animation_player", "body")]
+script = ExtResource("4_qvldq")
+animation_player = NodePath("../../AnimationPlayer")
+animation_name = "attack"
+body = NodePath("../..")
+
+[node name="SeekAction" type="Node" parent="Planner" node_paths=PackedStringArray("body")]
+script = ExtResource("5_6mq2c")
+body = NodePath("../..")
