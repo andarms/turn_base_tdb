@@ -2,19 +2,19 @@
 class_name Agent extends HTNP
 
 var percents: Dictionary = {Percents.FOOD_LOCATION: [Vector2i(20, 15)]}
-# Percents.TARGET: Vector2i(19, 3)
 @export var planner: Planner
 
 var plan: Array[Action] = []
 var current_action: Action = null
 
 
+func _ready() -> void:
+	TurnManager.next_turn.connect(on_next_turn)
+
+
 func _process(delta: float) -> void:
-	if not current_action and plan.is_empty():
-		plan = get_new_plan()
 	if not current_action:
-		current_action = plan.pop_front()
-		current_action.setup(percents)
+		return
 	var valid = current_action.validate_preconditions(percents)
 	if not valid:
 		return
@@ -29,6 +29,14 @@ func _process(delta: float) -> void:
 			current_action = null
 		_:
 			return
+
+
+func on_next_turn() -> void:
+	if not current_action and plan.is_empty():
+		plan = get_new_plan()
+	if not current_action:
+		current_action = plan.pop_front()
+		current_action.setup(percents)
 
 
 ## There are three conditions that will force the planner to find a new plan:

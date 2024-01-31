@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 WorldState="*res://src/managers/world_state.gd"
+AssetsReferences="*res://src/managers/assets_references.gd"
+TurnManager="*res://src/managers/turn_manager.gd"
 
 [display]
 

@@ -53,3 +53,4 @@ func move(direction: Vector2) -> void:
 
 	target_position = map.map_to_local(target_tile)
 	is_moving = true
+	TurnManager.force_next_turn()

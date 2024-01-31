@@ -1,15 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://jvlxsi4bic1l"]
+[gd_scene load_steps=6 format=3 uid="uid://jvlxsi4bic1l"]
 
 [ext_resource type="Texture2D" uid="uid://cvq2ojfmxa1l7" path="res://assets/tiles/tilematiny_dungeon.png" id="1_opqjq"]
 [ext_resource type="Script" path="res://src/entities/player/player_movement.gd" id="2_rmvd3"]
+[ext_resource type="Script" path="res://src/components/health.gd" id="3_07qpe"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="4_kb03k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lg0n4"]
+size = Vector2(14, 14)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(40, 40)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_opqjq")
-region_enabled = true
-region_rect = Rect2(16, 128, 16, 16)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 16)
@@ -19,3 +18,20 @@ script = ExtResource("2_rmvd3")
 speed = 96.0
 body = NodePath("..")
 ray = NodePath("../RayCast2D")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("3_07qpe")
+max_health = 100
+current = 100
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("healt")]
+script = ExtResource("4_kb03k")
+healt = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_lg0n4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_opqjq")
+region_enabled = true
+region_rect = Rect2(16, 128, 16, 16)

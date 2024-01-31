@@ -9,3 +9,5 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	text = "FPS : %0.2f" % Engine.get_frames_per_second()
+	text += "\n"
+	text += "Turn: %d" % TurnManager.current_turn
