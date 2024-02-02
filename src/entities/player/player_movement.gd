@@ -10,6 +10,8 @@ var target_position: Vector2
 
 
 func _process(_delta: float) -> void:
+	if AssetsReferences.paused:
+		return
 	if is_moving:
 		return
 
@@ -24,6 +26,8 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if AssetsReferences.paused:
+		return
 	if !is_moving:
 		return
 

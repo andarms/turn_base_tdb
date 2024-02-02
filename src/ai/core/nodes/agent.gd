@@ -13,6 +13,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if AssetsReferences.paused:
+		return
 	if not current_action:
 		return
 	var valid = current_action.validate_preconditions(percents)

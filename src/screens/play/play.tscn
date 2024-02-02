@@ -1,5 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccyfkp54sosas"]
+[gd_scene load_steps=10 format=3 uid="uid://ccyfkp54sosas"]
 
+[ext_resource type="PackedScene" uid="uid://cfjg5t1pcdmdp" path="res://src/screens/play/pause/pause.tscn" id="1_dx8bw"]
+[ext_resource type="Script" path="res://src/screens/play/play.gd" id="1_ssqf2"]
 [ext_resource type="PackedScene" uid="uid://jvlxsi4bic1l" path="res://src/entities/player/player.tscn" id="2_hiq2x"]
 [ext_resource type="TileSet" uid="uid://yor0f3hx1010" path="res://tiny_dunguon_tileset.tres" id="2_m7qcl"]
 [ext_resource type="Script" path="res://src/debug/fps.gd" id="4_8rjxf"]
@@ -10,7 +12,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qpiij"]
 size = Vector2(16, 16)
 
-[node name="Node2D" type="Node2D"]
+[node name="PlayScreen" type="Node2D"]
+script = ExtResource("1_ssqf2")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_m7qcl")
@@ -33,6 +36,9 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("4_8rjxf")
 
+[node name="Pause" parent="CanvasLayer" instance=ExtResource("1_dx8bw")]
+visible = false
+
 [node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("damage")]
 position = Vector2(8, 24)
 script = ExtResource("5_o6aha")
@@ -47,5 +53,11 @@ amount = 10
 
 [node name="Enemy" parent="." instance=ExtResource("6_5808j")]
 position = Vector2(-56, 24)
+
+[node name="Enemy2" parent="." instance=ExtResource("6_5808j")]
+position = Vector2(112, 40)
+
+[node name="Enemy3" parent="." instance=ExtResource("6_5808j")]
+position = Vector2(248, 32)
 
 [editable path="Player"]
