@@ -2,13 +2,13 @@ class_name Enemy extends CharacterBody2D
 
 @export var map: TileMap
 @export var player: CharacterBody2D
+@export var speed: int = 30
 
 @onready var sprite: Sprite2D = $Sprite2D
 
 var grid: AStarGrid2D
 var is_moving: bool = false
 var target_position: Vector2
-var speed: float = 30
 var path: Array[Vector2i] = []
 
 

@@ -2,7 +2,7 @@ class_name MoveToTileAction extends Action
 
 @export var direction: Vector2
 @export var body: CharacterBody2D
-@export var speed: float = 50.0
+@export var speed: float = 30.0
 
 var target: Vector2
 
