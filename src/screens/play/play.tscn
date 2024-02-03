@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccyfkp54sosas"]
+[gd_scene load_steps=12 format=3 uid="uid://ccyfkp54sosas"]
 
 [ext_resource type="PackedScene" uid="uid://cfjg5t1pcdmdp" path="res://src/screens/play/pause/pause.tscn" id="1_dx8bw"]
 [ext_resource type="Script" path="res://src/screens/play/play.gd" id="1_ssqf2"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://src/components/damage.gd" id="5_fo6ru"]
 [ext_resource type="Script" path="res://src/components/hitbox.gd" id="5_o6aha"]
 [ext_resource type="PackedScene" uid="uid://do0d53gt66oah" path="res://src/entities/enemies/enemy.tscn" id="6_5808j"]
+[ext_resource type="PackedScene" uid="uid://dwgl40a2yjoso" path="res://src/components/bullet/bullet.tscn" id="9_4q3cs"]
+[ext_resource type="Script" path="res://src/components/bullet/bullet_spawner.gd" id="9_35a1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qpiij"]
 size = Vector2(16, 16)
@@ -55,9 +57,15 @@ amount = 10
 position = Vector2(-56, 24)
 
 [node name="Enemy2" parent="." instance=ExtResource("6_5808j")]
-position = Vector2(112, 40)
+position = Vector2(120, 23)
 
 [node name="Enemy3" parent="." instance=ExtResource("6_5808j")]
-position = Vector2(248, 32)
+position = Vector2(248, 24)
+
+[node name="BulletSpawner" type="Node2D" parent="."]
+position = Vector2(80, 168)
+script = ExtResource("9_35a1t")
+bullet = ExtResource("9_4q3cs")
+bullet_direction = Vector2(2.08165e-12, -1)
 
 [editable path="Player"]

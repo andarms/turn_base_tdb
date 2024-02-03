@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwgl40a2yjoso"]
+
+[ext_resource type="Script" path="res://src/components/bullet/bullet.gd" id="1_7afhh"]
+[ext_resource type="Texture2D" uid="uid://cvq2ojfmxa1l7" path="res://assets/tiles/tilematiny_dungeon.png" id="2_x6b86"]
+[ext_resource type="Script" path="res://src/components/hitbox.gd" id="3_tvfgc"]
+[ext_resource type="Script" path="res://src/components/damage.gd" id="4_vi0dp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhq4y"]
+size = Vector2(16, 16)
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_7afhh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_x6b86")
+region_enabled = true
+region_rect = Rect2(160, 160, 16, 16)
+
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("damage")]
+script = ExtResource("3_tvfgc")
+damage = NodePath("Damage")
+
+[node name="Damage" type="Node" parent="HitBox"]
+script = ExtResource("4_vi0dp")
+amount = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_mhq4y")

@@ -1,7 +1,7 @@
 class_name PlayerMovement extends Node2D
 
 @export var map: TileMap
-@export var speed: float = 60
+@export var speed: float = 100
 @export var body: CharacterBody2D
 @export var ray: RayCast2D
 
@@ -14,15 +14,11 @@ func _process(_delta: float) -> void:
 		return
 	if is_moving:
 		return
-
-	if Input.is_action_pressed("up"):
-		move(Vector2(0, -1))
-	elif Input.is_action_pressed("down"):
-		move(Vector2(0, 1))
-	elif Input.is_action_pressed("left"):
-		move(Vector2(-1, 0))
-	elif Input.is_action_pressed("right"):
-		move(Vector2(1, 0))
+	var input_direction = Input.get_vector("left", "right", "up", "down")
+	var x = 1 if input_direction.x > 0 else -1 if input_direction.x < 0 else 0
+	var y = 1 if input_direction.y > 0 else -1 if input_direction.y < 0 else 0
+	if input_direction.length() > 0:
+		move(Vector2(x, y))
 
 
 func _physics_process(delta: float) -> void:

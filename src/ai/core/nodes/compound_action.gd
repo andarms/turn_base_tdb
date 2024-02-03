@@ -49,7 +49,6 @@ func decompose_selection(agent_state: Dictionary) -> Array[Action]:
 
 func validate_action(action: Action, agent_state: Dictionary):
 	var valid = action.validate_execution() and action.validate_preconditions(agent_state)
-	print("validating %s %s" % [action, valid])
 	if valid:
 		action.apply_effects(agent_state)
 	return valid

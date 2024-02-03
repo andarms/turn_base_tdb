@@ -5,11 +5,11 @@ var current_turn = 0
 var turn_timer = Timer.new()
 
 
-func _ready() -> void:
-	next_turn.connect(_on_next_turn)
-	add_child(turn_timer)
-	turn_timer.set_wait_time(0.5)
-	turn_timer.timeout.connect(emit_next_turn)
+# func _ready() -> void:
+# 	next_turn.connect(_on_next_turn)
+# 	add_child(turn_timer)
+# 	turn_timer.set_wait_time(0.5)
+# 	turn_timer.timeout.connect(emit_next_turn)
 
 
 func _on_next_turn() -> void:
