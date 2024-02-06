@@ -65,7 +65,6 @@ func move() -> void:
 
 	self.path.pop_front()
 	if self.path.size() == 0:
-		print("No path found")
 		return
 
 	if self.path.size() == 1:

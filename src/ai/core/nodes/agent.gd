@@ -46,7 +46,5 @@ func on_next_turn() -> void:
 ## 2. The agent does not have a plan
 ## 3. The agent's percents changes via a sensor
 func get_new_plan() -> Array[Action]:
-	print("Creating new plan")
 	var new_plan = planner.decompose(percents.duplicate(true))
-	print("plan = ", new_plan)
 	return new_plan

@@ -19,6 +19,13 @@ speed = 96.0
 body = NodePath("..")
 ray = NodePath("../RayCast2D")
 
+[node name="Cursor" type="Node2D" parent="PlayerMovement"]
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerMovement/Cursor"]
+texture = ExtResource("1_opqjq")
+region_enabled = true
+region_rect = Rect2(0, 80, 16, 16)
+
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("3_07qpe")
 max_health = 100

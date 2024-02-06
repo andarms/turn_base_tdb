@@ -4,5 +4,4 @@ class_name HurtBox extends Area2D
 
 
 func take_damage(damage):
-	print("HurtBox: take_damage")
 	healt.take_damage(damage)

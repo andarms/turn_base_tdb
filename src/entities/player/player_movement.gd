@@ -5,6 +5,9 @@ class_name PlayerMovement extends Node2D
 @export var body: CharacterBody2D
 @export var ray: RayCast2D
 
+
+@onready var cursor: Node2D = $Cursor
+
 var is_moving = false
 var target_position: Vector2
 
@@ -15,8 +18,8 @@ func _process(_delta: float) -> void:
 	if is_moving:
 		return
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	var x = 1 if input_direction.x > 0 else -1 if input_direction.x < 0 else 0
-	var y = 1 if input_direction.y > 0 else -1 if input_direction.y < 0 else 0
+	var x = 1 if input_direction.x > 0.65 else -1 if input_direction.x < 0 else 0
+	var y = 1 if input_direction.y > 0.65 else -1 if input_direction.y < 0 else 0
 	if input_direction.length() > 0:
 		move(Vector2(x, y))
 
@@ -54,3 +57,4 @@ func move(direction: Vector2) -> void:
 	target_position = map.map_to_local(target_tile)
 	is_moving = true
 	TurnManager.force_next_turn()
+	cursor.global_position = target_position
