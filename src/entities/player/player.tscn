@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://jvlxsi4bic1l"]
+[gd_scene load_steps=8 format=3 uid="uid://jvlxsi4bic1l"]
 
 [ext_resource type="Texture2D" uid="uid://cvq2ojfmxa1l7" path="res://assets/tiles/tilematiny_dungeon.png" id="1_opqjq"]
 [ext_resource type="Script" path="res://src/entities/player/player_movement.gd" id="2_rmvd3"]
 [ext_resource type="Script" path="res://src/components/health.gd" id="3_07qpe"]
 [ext_resource type="Script" path="res://src/components/hurtbox.gd" id="4_kb03k"]
+[ext_resource type="Script" path="res://src/components/fms/state_machine.gd" id="5_7cbnt"]
+[ext_resource type="Script" path="res://src/entities/player/aim.gd" id="6_hd41e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lg0n4"]
 size = Vector2(14, 14)
@@ -12,19 +14,6 @@ size = Vector2(14, 14)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 16)
-
-[node name="PlayerMovement" type="Node2D" parent="." node_paths=PackedStringArray("body", "ray")]
-script = ExtResource("2_rmvd3")
-speed = 96.0
-body = NodePath("..")
-ray = NodePath("../RayCast2D")
-
-[node name="Cursor" type="Node2D" parent="PlayerMovement"]
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerMovement/Cursor"]
-texture = ExtResource("1_opqjq")
-region_enabled = true
-region_rect = Rect2(0, 80, 16, 16)
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("3_07qpe")
@@ -42,3 +31,24 @@ shape = SubResource("RectangleShape2D_lg0n4")
 texture = ExtResource("1_opqjq")
 region_enabled = true
 region_rect = Rect2(16, 128, 16, 16)
+
+[node name="Cursor" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Cursor"]
+texture = ExtResource("1_opqjq")
+region_enabled = true
+region_rect = Rect2(0, 80, 16, 16)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_7cbnt")
+
+[node name="PlayerMovementState" type="Node" parent="StateMachine" node_paths=PackedStringArray("body", "ray", "cursor")]
+script = ExtResource("2_rmvd3")
+body = NodePath("../..")
+ray = NodePath("../../RayCast2D")
+cursor = NodePath("../../Cursor")
+
+[node name="AimState" type="Node" parent="StateMachine" node_paths=PackedStringArray("cursor", "body")]
+script = ExtResource("6_hd41e")
+cursor = NodePath("../../Cursor")
+body = NodePath("../..")

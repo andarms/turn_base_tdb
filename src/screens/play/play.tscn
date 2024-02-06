@@ -25,8 +25,8 @@ layer_0/tile_data = PackedInt32Array(-65552, 131072, 1, -16, 0, 4, 65520, 0, 4, 
 [node name="Player" parent="." instance=ExtResource("2_hiq2x")]
 position = Vector2(80, 80)
 
-[node name="PlayerMovement" parent="Player" index="1" node_paths=PackedStringArray("map")]
-map = NodePath("../../TileMap")
+[node name="PlayerMovementState" parent="Player/StateMachine" index="0" node_paths=PackedStringArray("map")]
+map = NodePath("../../../TileMap")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3, 3)

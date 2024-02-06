@@ -1,21 +1,24 @@
-class_name PlayerMovement extends Node2D
+class_name PlayerMovementState extends State
 
 @export var map: TileMap
 @export var speed: float = 100
 @export var body: CharacterBody2D
 @export var ray: RayCast2D
+@export var cursor: Node2D
 
 
-@onready var cursor: Node2D = $Cursor
 
 var is_moving = false
 var target_position: Vector2
 
 
-func _process(_delta: float) -> void:
+func process(_delta: float) -> void:
 	if AssetsReferences.paused:
 		return
 	if is_moving:
+		return
+	if Input.is_action_pressed("aim"):
+		transitioned.emit('aimstate')
 		return
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	var x = 1 if input_direction.x > 0.65 else -1 if input_direction.x < 0 else 0
@@ -24,7 +27,7 @@ func _process(_delta: float) -> void:
 		move(Vector2(x, y))
 
 
-func _physics_process(delta: float) -> void:
+func physics_process(delta: float) -> void:
 	if AssetsReferences.paused:
 		return
 	if !is_moving:
