@@ -32,23 +32,15 @@ texture = ExtResource("1_opqjq")
 region_enabled = true
 region_rect = Rect2(16, 128, 16, 16)
 
-[node name="Cursor" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Cursor"]
-texture = ExtResource("1_opqjq")
-region_enabled = true
-region_rect = Rect2(0, 80, 16, 16)
-
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("5_7cbnt")
 
-[node name="PlayerMovementState" type="Node" parent="StateMachine" node_paths=PackedStringArray("body", "ray", "cursor")]
+[node name="PlayerMovementState" type="Node" parent="StateMachine" node_paths=PackedStringArray("body", "ray")]
 script = ExtResource("2_rmvd3")
+speed = null
 body = NodePath("../..")
 ray = NodePath("../../RayCast2D")
-cursor = NodePath("../../Cursor")
 
-[node name="AimState" type="Node" parent="StateMachine" node_paths=PackedStringArray("cursor", "body")]
+[node name="AimState" type="Node" parent="StateMachine" node_paths=PackedStringArray("body")]
 script = ExtResource("6_hd41e")
-cursor = NodePath("../../Cursor")
 body = NodePath("../..")

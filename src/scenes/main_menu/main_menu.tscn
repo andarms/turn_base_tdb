@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://qo7x8frs5i84"]
 
-[ext_resource type="Script" path="res://src/screens/main_menu/main_menu.gd" id="1_j5p6n"]
+[ext_resource type="Script" path="res://src/scenes/main_menu/main_menu.gd" id="1_j5p6n"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -38,7 +38,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 64
-text = "U.Z.S"
+text = "TBD Robot Game"
 
 [node name="Version" type="Label" parent="MarginContainer"]
 layout_mode = 2
