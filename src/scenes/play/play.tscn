@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccyfkp54sosas"]
+[gd_scene load_steps=15 format=3 uid="uid://ccyfkp54sosas"]
 
 [ext_resource type="PackedScene" uid="uid://cfjg5t1pcdmdp" path="res://src/scenes/play/pause/pause.tscn" id="1_dx8bw"]
 [ext_resource type="Script" path="res://src/scenes/play/play.gd" id="1_ssqf2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/components/damage.gd" id="5_fo6ru"]
 [ext_resource type="Script" path="res://src/components/hitbox.gd" id="5_o6aha"]
 [ext_resource type="PackedScene" uid="uid://do0d53gt66oah" path="res://src/entities/enemies/enemy.tscn" id="6_5808j"]
+[ext_resource type="Script" path="res://src/components/dynamic_camera.gd" id="6_y40in"]
 [ext_resource type="PackedScene" uid="uid://dwgl40a2yjoso" path="res://src/components/bullet/bullet.tscn" id="9_4q3cs"]
 [ext_resource type="Script" path="res://src/components/bullet/bullet_spawner.gd" id="9_35a1t"]
 [ext_resource type="Script" path="res://src/entities/player/Cursor.gd" id="11_px5qi"]
@@ -47,6 +48,12 @@ layer_0/tile_data = PackedInt32Array(-65552, 131072, 1, -16, 0, 4, 65520, 0, 4, 
 [node name="Player" parent="." instance=ExtResource("2_hiq2x")]
 position = Vector2(80, 80)
 
+[node name="DynamicCamera" type="Camera2D" parent="Player"]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+script = ExtResource("6_y40in")
+
 [node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("damage")]
 position = Vector2(8, 24)
 script = ExtResource("5_o6aha")
@@ -74,10 +81,6 @@ script = ExtResource("9_35a1t")
 bullet = ExtResource("9_4q3cs")
 bullet_direction = Vector2(2.08165e-12, -1)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(80, 80)
-zoom = Vector2(2, 2)
-
 [node name="Cursor" type="Node2D" parent="."]
 script = ExtResource("11_px5qi")
 
@@ -85,5 +88,3 @@ script = ExtResource("11_px5qi")
 texture = ExtResource("12_chs6x")
 region_enabled = true
 region_rect = Rect2(0, 80, 16, 16)
-
-[editable path="Player"]
